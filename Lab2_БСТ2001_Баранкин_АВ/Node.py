@@ -18,6 +18,7 @@ def inorder(root):
         # Обход правого поддерева
         inorder(root.right)
 
+
 # Вставка элемента
 def insert(node, data, index):
     # Если дерево пустое, вернём новый узел
@@ -30,11 +31,11 @@ def insert(node, data, index):
         node.right = insert(node.right, data, index)
     return node
 
+
 # Поиск inorder-преемника
 def minValueNode(node):
     current = node
     # Inorder-преемник - это найденный крайний левый лист
-    while(current.left is not None):
+    while (current.left is not None):
         current = current.left
     return current
-

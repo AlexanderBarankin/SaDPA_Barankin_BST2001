@@ -1,5 +1,6 @@
 import time
 
+
 # Создадим класс хэш-таблицы
 class HashTable:
     size = int(input("Введите размер хэш-таблицы "))
@@ -44,14 +45,14 @@ class HashTable:
     def getRehash(self, oldhash):
         return oldhash + 1
 
+
 # Заполним хэш-таблицу двумя значениями
 table = HashTable()
 
 table[input('\nВведите ключ ')] = input('\nВведите значение ')
 table[input('\nВведите ключ ')] = input('\nВведите значение ')
 
-answer = input ('Вы хотите найти значение по ключу? Введите "да" или "нет". Ваш ответ:  ')
+answer = input('Вы хотите найти значение по ключу? Введите "да" или "нет". Ваш ответ:  ')
 if answer == 'да':
     # Выводим одно из значений через ключ
     print(table[input('\nВыберите значение по ключу ')])
-
