@@ -2,23 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d31dec63-44f2-4c3c-b0dd-c52a888f284b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/SaDPA_Barankin_BST2001.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/Lab3_БСТ2001_Баранкин_АВ.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LabWork3Tasks" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/task2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/.idea/LabWork2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/.idea/LabWork2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/Node.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/Node.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/Task1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/Task1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/Task2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/Task2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/Task3.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab2_БСТ2001_Баранкин_АВ/Task3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LabWork2/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../LabWork2/.idea/workspace.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/.idea/Lab4_БСТ2001_Баранкин_АВ.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/books.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/deque.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/lab_work_4_tasks.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Lab4_БСТ2001_Баранкин_АВ/stack.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/SaDPA_Barankin_BST2001.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +51,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/task2.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyIntegratedToolsModulesConfigurable" />
   </component>
   <component name="RunManager" selected="Python.task2">
