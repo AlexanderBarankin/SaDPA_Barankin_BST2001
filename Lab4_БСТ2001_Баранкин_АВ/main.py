@@ -128,7 +128,7 @@ def main():
                     if rb == '(':
                         brackets.push(rb)
                     elif rb == ')':
-                        if brackets.is_empty:
+                        if brackets.is_empty():
                             return False
                         brackets.pop()
                 return brackets.is_empty()
