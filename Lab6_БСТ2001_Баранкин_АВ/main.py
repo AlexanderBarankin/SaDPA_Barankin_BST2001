@@ -1,185 +1,132 @@
-def read_file():
-    import re
-    lt = list()
-    data = list()
-    pattern = '-*[0-9]+'
-    filename = 'graph.txt'
-    file = open(filename, 'r')
-    lt.append(file.readlines())
-    file.close()
-    for x in lt:
-        data = re.findall(pattern, str(x))
-    return data
+# Implementation of Johnson's algorithm
+
+import time
+from collections import defaultdict
+import networkx as nx
+from matplotlib import pyplot as plt
+
+MAX_INT = float('Inf')
 
 
-def set_data(data):
-    source = list()
-    destination = list()
-    edge_cost = list()
-    test = 0
-    vertices = 0
-    edges = 0
-    distance = list()
-    for x in data:
-        if test == 0:
-            vertices = x
-        if test == 1:
-            edges = x
-        if test == 2:
-            source.append(int(x))
-        if test == 3:
-            destination.append(int(x))
-        if test == 4:
-            edge_cost.append(int(x))
-            test = 1
-        test += 1
-    vertex_list = list(vertices)
-    test = int(vertices) - 1
-    while test > 0:
-        vertex_list.append(test)
-        test -= 1
-    for x in vertex_list:
-        source.append(0)
-        destination.append(int(x))
-        edge_cost.append(0)
-    distance = list()
-    test = 0
-    while test < int(vertices) + 1:
-        distance.append(test)
-        test += 1
-    return vertices, edges, source, destination, edge_cost, vertex_list, distance
+# Returns the vertex with minimum distance from the source
+def min_distance(dist, visited):
+    (minimum, min_vertex) = (MAX_INT, 0)
+    for vertex in range(len(dist)):
+        if minimum > dist[vertex] and not visited[vertex]:
+            (minimum, min_vertex) = (dist[vertex], vertex)
+
+    return min_vertex
 
 
-def initialize(distance):
-    predecessor = list()
-    d = list()
-    # initialization
-    for x in distance:
-        if x == 0:
-            d.append(0)
-        else:
-            d.append(999999999)
-        predecessor.append('null')
-    return d, predecessor
+# Dijkstra Algorithm for Modified Graph (removing negative weights)
+def Dijkstra(graph, modified_graph, src):
+    # Number of vertices in the graph
+    num_vertices = len(graph)
+
+    # Dictionary to check if given vertex is already included in the shortest path tree
+    spt_set = defaultdict(lambda: False)
+
+    # Shortest distance of all vertices from the source
+    dist = [MAX_INT] * num_vertices
+
+    dist[src] = 0
+
+    for count in range(num_vertices):
+
+        # The current vertex which is at min Distance from the source and not yet included in the shortest path tree
+        cur_vertex = min_distance(dist, spt_set)
+        spt_set[cur_vertex] = True
+
+        for vertex in range(num_vertices):
+            if not spt_set[vertex] and dist[vertex] > (dist[cur_vertex] + modified_graph[cur_vertex][vertex]) and \
+                    graph[cur_vertex][vertex] != 0:
+                dist[vertex] = dist[cur_vertex] + modified_graph[cur_vertex][vertex]
+
+    # Print the Shortest distance from the source
+    for vertex in range(num_vertices):
+        print('Vertex ' + str(vertex) + ': ' + str(dist[vertex]))
 
 
-def relax(vertices, source, destination, edge_cost, d, predecessor, edges):
-    y = 0
-    i = 0
-    z = 0
-    for x in edge_cost:
-        z += 1
-    while i < int(vertices):
-        while y < int(z):
-            if d[int(source[y])] + edge_cost[y] < d[int(destination[y])]:
-                d[int(destination[y])] = int(edge_cost[y]) + d[int(source[y])]
-                predecessor[int(destination[y])] = source[y]
-            y += 1
-        y = 0
-        i += 1
-    return source, destination, edge_cost, d, predecessor
+# Function to calculate the shortest distances from source to all other vertices using Bellman-Ford algorithm
+def Bellman_Ford(edges, num_vertices):
+    # Add a source s and calculate its min distance from every other node
+    dist = [MAX_INT] * (num_vertices + 1)
+    dist[num_vertices] = 0
+
+    for i in range(num_vertices):
+        edges.append([num_vertices, i, 0])
+
+    for i in range(num_vertices):
+        for (src, des, weight) in edges:
+            if ((dist[src] != MAX_INT) and
+                    (dist[src] + weight < dist[des])):
+                dist[des] = dist[src] + weight
+
+    # Don't send the value for the source added
+    return dist[0:num_vertices]
 
 
-def re_weight(vertices, source, destination, edge_cost, d, edges):
-    y = 0
-    z = 0
-    for x in edge_cost:
-        z += 1
-    while y < int(z) - 1:
-        edge_cost[y] = edge_cost[y] + d[int(source[y])] - d[int(destination[y])]
-        y += 1
-    return source, destination, edge_cost, d
+# Function to implement Johnson Algorithm
+def Johnson_Algorithm(graph):
+    edges = []
+
+    # Create a list of edges for Bellman-Ford Algorithm
+    for i in range(len(graph)):
+        for j in range(len(graph[i])):
+
+            if graph[i][j] != 0:
+                edges.append([i, j, graph[i][j]])
+
+    # Weights used to modify the original weights
+    modify_weights = Bellman_Ford(edges, len(graph))
+
+    modified_graph = [[0 for _ in range(len(graph))] for _ in
+                      range(len(graph))]
+
+    # Modify the weights to get rid of negative weights
+    for i in range(len(graph)):
+        for j in range(len(graph[i])):
+
+            if graph[i][j] != 0:
+                modified_graph[i][j] = (graph[i][j] +
+                                        modify_weights[i] - modify_weights[j])
+
+    print('Modified Graph: ' + str(modified_graph))
+
+    # Run Dijkstra for every vertex as source one by one
+    for src in range(len(graph)):
+        print('\nShortest Distance with vertex ' +
+              str(src) + ' as the source:\n')
+        Dijkstra(graph, modified_graph, src)
 
 
-def output(source, destination, edge_cost):
-    print('Output in the form...')
-    print('[Source]')
-    print('[Destination]')
-    print('[Reweighting]')
-    print()
-    print('Running Dijkstra on vertex n')
-    print('vertices [0...n]')
-    print('previous of [0...n]')
-    print('cost of [0...n]')
-    print()
-    print()
-    print(source)
-    print(destination)
-    print(edge_cost)
-    print()
+# Create matrix
+def make_matrix(m: int, n: int) -> list[list[int]]:
+    return [[0 for _ in range(m)] for _ in range(n)]
 
 
-def Dijkstra(vertex_list, source_vertex, source, destination, edge_cost, predecessor, edges, vertices):
-    u = 0
-    v = 0
-    alt = 0
-    count = 0
-    smallest = 9999999
-    new_vertex_list = list()
-    new_vertex_list.append(0)
-    for x in vertex_list:
-        new_vertex_list.append(int(x))
-    dist = list()
-    previous = list()
-    Q = set(new_vertex_list)
-    Q.remove(0)
-    for x in new_vertex_list:
-        if int(x) == int(source_vertex):
-            dist.append(0)
-        else:
-            dist.append(9999999)
-        previous.append('undefined')
-    while len(Q) != 0:
-        for y in Q:
-            if y != 0:
-                if dist[int(y)] < smallest:
-                    smallest = dist[y]
-                    u = y
-                if dist[y] == 999999:
-                    break
-        smallest = 9999999
-        Q.remove(u)
-        while int(count) < int(edges) + 1:
-            if source[count] == u:
-                v = destination[count]
-                alt = dist[u] + edge_cost[count]
-                if alt < dist[v]:
-                    dist[v] = alt
-                    previous[v] = u
-            count += 1
-        count = 0
-    print('Vertices:' + str(new_vertex_list))
-    print('Previous:' + str(previous))
-    print('Cost:    ' + str(dist))
-    print()
+# Main function
+def main():
+    start_time = time.time()
+
+    # Create graph
+    G: nx.DiGraph = nx.read_weighted_edgelist('graph.txt', create_using=nx.DiGraph)
+    matrix = make_matrix(len(G.nodes), len(G.nodes))
+
+    for (u, v, wt) in G.edges.data('weight'):
+        matrix[int(u)][int(v)] = float(wt)
+
+    print(matrix)
+
+    Johnson_Algorithm(matrix)
+
+    pos = nx.spring_layout(G)
+    nx.draw_networkx(G, pos)
+    labels = nx.get_edge_attributes(G, 'weight')
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+    print(f"{time.time() - start_time} sec.")
+    plt.show()
 
 
-def Johnson():
-    data = list()
-    source = list()
-    destination = list()
-    edge_cost = list()
-    test = 0
-    vertices = 0
-    edges = 0
-    data = read_file()
-    vertex_list = list()
-    distance = list()
-    vertices, edges, source, destination, edge_cost, vertex_list, distance = set_data(data)
-    predecessor = list()
-    d = list()
-    d, predecessor = initialize(distance)
-    # relaxation
-    source, destination, edge_cost, d, predecessor = relax(vertices, source, destination, edge_cost, d, predecessor,
-                                                           edges)
-    # change weights
-    vertex_list.reverse()
-    source, destination, edge_cost, d = re_weight(vertices, source, destination, edge_cost, d, edges)
-    output(source, destination, edge_cost)
-    for x in vertex_list:
-        print('Running Dijkstra on vertex ' + str(x))
-        Dijkstra(vertex_list, x, source, destination, edge_cost, predecessor, edges, vertices)
-
-
-if __name__ == '__main__':
-    Johnson()
+# Driver Code
+main()
